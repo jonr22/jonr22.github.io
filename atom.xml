@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Developing Jon]]></title>
+  <link href="http://jonr22.github.io/atom.xml" rel="self"/>
+  <link href="http://jonr22.github.io/"/>
+  <updated>2014-02-07T15:48:40-05:00</updated>
+  <id>http://jonr22.github.io/</id>
+  <author>
+    <name><![CDATA[Jon Reimels]]></name>
+    <email><![CDATA[jonr2219@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Hello World]]></title>
+    <link href="http://jonr22.github.io/blog/2014/02/07/hello-world/"/>
+    <updated>2014-02-07T15:28:14-05:00</updated>
+    <id>http://jonr22.github.io/blog/2014/02/07/hello-world</id>
+    <content type="html"><![CDATA[<p>As a developer I figured I better start off blogging with a &ldquo;Hello World.&rdquo;</p>
+
+<p>I&rsquo;m planning to use this blog to talk about things I find interesting, mostly that&rsquo;s programming.
+But I have some other interests as well!</p>
+
+<p>I&rsquo;m just starting to learn Ruby and the Rails framework and I hope to use this blog to talk about my
+experiences with it. I love learning new languages, but I&rsquo;ve been particularly enjoying learning
+Ruby, it&rsquo;s a great language. I come primarily from a C and Java/C# background and I&rsquo;ve dabbled with
+Python, Perl, and PHP. However, I&rsquo;ve found a strong affinity for Ruby and the Ruby Way.</p>
+
+<p>I hope that as I continue to post, others will find this useful, or share their experiences or
+insights in the comments.</p>
+]]></content>
+  </entry>
+  
+</feed>
