@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Vim | Developing Jon]]></title>
+  <link href="http://jonr22.github.io/blog/categories/vim/atom.xml" rel="self"/>
+  <link href="http://jonr22.github.io/"/>
+  <updated>2014-03-12T14:32:31-04:00</updated>
+  <id>http://jonr22.github.io/</id>
+  <author>
+    <name><![CDATA[Jon Reimels]]></name>
+    <email><![CDATA[jonr2219@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Tmux]]></title>
+    <link href="http://jonr22.github.io/blog/2013/09/12/tmux/"/>
+    <updated>2013-09-12T02:19:03-04:00</updated>
+    <id>http://jonr22.github.io/blog/2013/09/12/tmux</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ve got tmux setup on my mac now. I&rsquo;m running it in iterm2 and using zsh as the default shell. It
+took a lot of playing with to get it setup right, but so far I think it&rsquo;s worth it! Obviously I&rsquo;m
+still learning a ton and I hope to share my experiences as I continue working with these tools, but
+so far I&rsquo;ve found some great resources.</p>
+
+<!-- more -->
+
+
+<p>A great article on setting up iterm2, vim, tmux and zsh:
+<a href="http://www.drbunsen.org/the-text-triumvirate">drbunsen.org/the-text-triumvirate</a></p>
+
+<p>Also the github repos I mentioned in my previous post from
+<a href="https://github.com/thoughtbot/dotfiles">thoughtbot</a> and
+<a href="https://github.com/square/maximum-awesome">square</a> both have some great config settings, and
+<a href="https://learn.thoughtbot.com/tmux">thoughtbot</a> has some additional helpful articles as well.</p>
+
+<p>The only issue that I had trouble with was getting colors to display properly in vim when in tmux.
+My colors (<a href="http://ethanschoonover.com/solarized">solarized</a>) would display fine in the regular
+terminal, but as soon as I started up tmux and tried to run vim inside of it, the colors would get
+messed up. It turns out I needed to set the TERM from which I was calling tmux, this can be done in
+one of two ways, the first would be to call tmux like this (or set an alias):</p>
+
+<p><code>bash
+TERM=xterm-256color tmux
+</code></p>
+
+<p>The other is to update your terminal app to set TERM appropriately, in iTerm2 I did this in
+<code>Preferences &gt; Profile &gt; Terminal &gt; Report Terminal Type</code> which I set to <code>xterm-256color</code></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Vim]]></title>
+    <link href="http://jonr22.github.io/blog/2013/09/10/vim/"/>
+    <updated>2013-09-10T02:38:56-04:00</updated>
+    <id>http://jonr22.github.io/blog/2013/09/10/vim</id>
+    <content type="html"><![CDATA[<p>Square recently released their Vim setup on github
+<a href="https://github.com/square/maximum-awesome/tree/master/vim/bundle">github.com/square/maximum-awesome/tree/master/vim/bundle</a>.
+I&rsquo;ve had a look through it and I&rsquo;ve found some great stuff to add to my current vim setup
+<a href="https://github.com/jonr22/dotfiles">github.com/jonr22/dotfiles</a>. They&rsquo;ve got some
+useful stuff in there and I definitely recommmend checking it out. It&rsquo;s really great to see
+these things being shared with the community!</p>
+
+<!-- more -->
+
+
+<p>I&rsquo;ve always loved using vim, but being new to Ruby and to Rails I didn&rsquo;t realize how many great
+plugins there are out there (most of them seem to be by Tim Pope, he&rsquo;s got a lot of great Vim
+stuff!!). This got me looking around and I found some good stuff from thoughtbot as well
+<a href="https://github.com/thoughtbot/dotfiles">github.com/thoughtbot/dotfiles</a>.</p>
+
+<p>Looking around at this stuff, I&rsquo;ve noticed that a lot of people seem to be using iTerm2, tmux, and zsh. I&rsquo;m going
+to have to look at these soon, I&rsquo;ve always used bash and I&rsquo;m pretty comfortable with it, but
+zsh might be worth a try. I&rsquo;ve done most of my terminal work on linux, so terminal.app was always
+good enough for me when I&rsquo;ve been on my mac. These days I seem to be doing a lot more on mac instead of my
+linux VMs though, so I&rsquo;m looking forward to trying out iTerm2.</p>
+]]></content>
+  </entry>
+  
+</feed>

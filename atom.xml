@@ -4,7 +4,7 @@
   <title><![CDATA[Developing Jon]]></title>
   <link href="http://jonr22.github.io/atom.xml" rel="self"/>
   <link href="http://jonr22.github.io/"/>
-  <updated>2014-02-07T15:48:40-05:00</updated>
+  <updated>2014-03-12T14:32:31-04:00</updated>
   <id>http://jonr22.github.io/</id>
   <author>
     <name><![CDATA[Jon Reimels]]></name>
@@ -14,10 +14,266 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Should_receive]]></title>
+    <link href="http://jonr22.github.io/blog/2014/02/03/should-receive/"/>
+    <updated>2014-02-03T19:40:39-05:00</updated>
+    <id>http://jonr22.github.io/blog/2014/02/03/should-receive</id>
+    <content type="html"><![CDATA[<p>The other day I ran into some issues using the should_receive method provided by RSpec (in
+<code>Spec::Mocks::Methods</code>). I was using it in a controller spec to test that a model was receiving the
+appropriate method call. I&rsquo;m still not sure if I like using this type of check in a test or not,
+but I guess that&rsquo;s a topic for another post.</p>
+
+<p>My test was equivalent to something like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">it</span> <span class="s1">&#39;creates a new post&#39;</span> <span class="k">do</span>
+</span><span class='line'>  <span class="no">Post</span><span class="o">.</span><span class="n">should_receive</span><span class="p">(</span><span class="ss">:new</span><span class="p">)</span><span class="o">.</span><span class="n">with</span><span class="p">(</span><span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;TestTitle&#39;</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">post</span> <span class="ss">:create</span><span class="p">,</span> <span class="ss">post</span><span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;TestTitle&#39;</span> <span class="p">}</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The error I was getting was:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="ss">NoMethodErrror</span><span class="p">:</span> <span class="n">undefined</span> <span class="nb">method</span> <span class="s1">&#39;save&#39;</span> <span class="k">for</span> <span class="kp">nil</span><span class="ss">:NilClass</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<!-- more -->
+
+
+<p>While I haven&rsquo;t had a chance to dig into the source code yet, I have a pretty good idea of what&rsquo;s
+causing this error based on the behavior I&rsquo;ve seen.</p>
+
+<p>So what I believe is happening, is that when the should_receive is used on a class, the method it
+specifies is either intercepted or stubbed in some way such that it returns nil. In my issue above,
+within my control when it calls &lsquo;new&rsquo; it gets a nil object back. It then calls save on the nil
+object (the controller is just the default rails 4 generated controller) and we get the error above.</p>
+
+<p>There are a few ways to solve this issue, the easiest is probably to mock the object returned by
+new. Here&rsquo;s what that would look like:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">it</span> <span class="s1">&#39;creates a new post&#39;</span> <span class="k">do</span>
+</span><span class='line'>  <span class="nb">p</span> <span class="o">=</span> <span class="n">mock_model</span><span class="p">(</span><span class="no">Post</span><span class="p">)</span><span class="o">.</span><span class="n">as_null_object</span>
+</span><span class='line'>  <span class="no">Post</span><span class="o">.</span><span class="n">should_receive</span><span class="p">(</span><span class="ss">:new</span><span class="p">)</span><span class="o">.</span>
+</span><span class='line'>    <span class="n">with</span><span class="p">(</span><span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;TestTitle&#39;</span><span class="p">)</span><span class="o">.</span>
+</span><span class='line'>    <span class="n">and_return</span><span class="p">(</span><span class="nb">p</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">post</span> <span class="ss">:create</span><span class="p">,</span> <span class="ss">post</span><span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;TestTitle&#39;</span> <span class="p">}</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The RSpec method <code>as_null_object</code> makes it so that the object can be passed any message and not
+throw an error. So now we have the Post.new returning a mock object that can accept any message, so
+when save is called, while it doesn&rsquo;t do anything, it also doesn&rsquo;t throw any exceptions.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Tmux]]></title>
+    <link href="http://jonr22.github.io/blog/2013/09/12/tmux/"/>
+    <updated>2013-09-12T02:19:03-04:00</updated>
+    <id>http://jonr22.github.io/blog/2013/09/12/tmux</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ve got tmux setup on my mac now. I&rsquo;m running it in iterm2 and using zsh as the default shell. It
+took a lot of playing with to get it setup right, but so far I think it&rsquo;s worth it! Obviously I&rsquo;m
+still learning a ton and I hope to share my experiences as I continue working with these tools, but
+so far I&rsquo;ve found some great resources.</p>
+
+<!-- more -->
+
+
+<p>A great article on setting up iterm2, vim, tmux and zsh:
+<a href="http://www.drbunsen.org/the-text-triumvirate">drbunsen.org/the-text-triumvirate</a></p>
+
+<p>Also the github repos I mentioned in my previous post from
+<a href="https://github.com/thoughtbot/dotfiles">thoughtbot</a> and
+<a href="https://github.com/square/maximum-awesome">square</a> both have some great config settings, and
+<a href="https://learn.thoughtbot.com/tmux">thoughtbot</a> has some additional helpful articles as well.</p>
+
+<p>The only issue that I had trouble with was getting colors to display properly in vim when in tmux.
+My colors (<a href="http://ethanschoonover.com/solarized">solarized</a>) would display fine in the regular
+terminal, but as soon as I started up tmux and tried to run vim inside of it, the colors would get
+messed up. It turns out I needed to set the TERM from which I was calling tmux, this can be done in
+one of two ways, the first would be to call tmux like this (or set an alias):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">TERM</span><span class="o">=</span>xterm-256color tmux
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The other is to update your terminal app to set TERM appropriately, in iTerm2 I did this in
+<code>Preferences &gt; Profile &gt; Terminal &gt; Report Terminal Type</code> which I set to <code>xterm-256color</code></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Vim]]></title>
+    <link href="http://jonr22.github.io/blog/2013/09/10/vim/"/>
+    <updated>2013-09-10T02:38:56-04:00</updated>
+    <id>http://jonr22.github.io/blog/2013/09/10/vim</id>
+    <content type="html"><![CDATA[<p>Square recently released their Vim setup on github
+<a href="https://github.com/square/maximum-awesome/tree/master/vim/bundle">github.com/square/maximum-awesome/tree/master/vim/bundle</a>.
+I&rsquo;ve had a look through it and I&rsquo;ve found some great stuff to add to my current vim setup
+<a href="https://github.com/jonr22/dotfiles">github.com/jonr22/dotfiles</a>. They&rsquo;ve got some
+useful stuff in there and I definitely recommmend checking it out. It&rsquo;s really great to see
+these things being shared with the community!</p>
+
+<!-- more -->
+
+
+<p>I&rsquo;ve always loved using vim, but being new to Ruby and to Rails I didn&rsquo;t realize how many great
+plugins there are out there (most of them seem to be by Tim Pope, he&rsquo;s got a lot of great Vim
+stuff!!). This got me looking around and I found some good stuff from thoughtbot as well
+<a href="https://github.com/thoughtbot/dotfiles">github.com/thoughtbot/dotfiles</a>.</p>
+
+<p>Looking around at this stuff, I&rsquo;ve noticed that a lot of people seem to be using iTerm2, tmux, and zsh. I&rsquo;m going
+to have to look at these soon, I&rsquo;ve always used bash and I&rsquo;m pretty comfortable with it, but
+zsh might be worth a try. I&rsquo;ve done most of my terminal work on linux, so terminal.app was always
+good enough for me when I&rsquo;ve been on my mac. These days I seem to be doing a lot more on mac instead of my
+linux VMs though, so I&rsquo;m looking forward to trying out iTerm2.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Custom Model Validation]]></title>
+    <link href="http://jonr22.github.io/blog/2013/09/08/custom-model-validation/"/>
+    <updated>2013-09-08T14:45:14-04:00</updated>
+    <id>http://jonr22.github.io/blog/2013/09/08/custom-model-validation</id>
+    <content type="html"><![CDATA[<p>So far I&rsquo;ve always been able to use the validates method within my models in Rails to handle all of
+my validation needs, whether it&rsquo;s checking a field exists, or checking its length, max/min values,
+or comparing it to a regex, model validation has been extremely easy within Rails.</p>
+
+<p>The other day I had a more complex validation requirement that I was worried would be more
+difficult to integrate so that it worked similarly to the existing validations in the model.
+However, after a few minutes of research I discovered how easy rails makes it to do exactly what I
+wanted!</p>
+
+<!-- more -->
+
+
+<p>The validation requirement was to run an address through a Address Verification service and report
+errors as needed.</p>
+
+<p>Rails made this easy with the validate method, which takes a method as a symbol for it&rsquo;s parameter,
+like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">validate</span> <span class="ss">:validate_address</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then in the method, you can add custom errors, so that when these errors have been added, the model
+will be considered invalid, like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">validate_address</span>
+</span><span class='line'>  <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span><span class='line'>  <span class="n">validated</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">validation</span> <span class="n">service</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="k">if</span> <span class="o">!</span><span class="n">validated</span>
+</span><span class='line'>    <span class="n">errors</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="ss">:base</span><span class="p">,</span> <span class="s2">&quot;Address could not be verified!&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>  <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This adds errors to the base you can even get more specific and add the error messages to a
+specific attribute like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">validate_address</span>
+</span><span class='line'>  <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span><span class='line'>  <span class="n">validate_status</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">validation</span> <span class="n">service</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="k">if</span> <span class="o">!</span><span class="n">validate_status</span><span class="o">.</span><span class="n">address1</span>
+</span><span class='line'>    <span class="n">errors</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="ss">:address1</span><span class="p">,</span> <span class="s2">&quot;Address could not be verified!&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">elsif</span> <span class="o">!</span><span class="n">validate_status</span><span class="o">.</span><span class="n">city</span>
+</span><span class='line'>    <span class="n">errors</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="ss">:city</span><span class="p">,</span> <span class="s2">&quot;Address could not be verified!&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">elsif</span> <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>  <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As you can see this ability to hook into the Rails model validation makes it easy to customize the
+validation of any models.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Defined Symbols]]></title>
+    <link href="http://jonr22.github.io/blog/2013/09/07/defined-symbols/"/>
+    <updated>2013-09-07T16:51:56-04:00</updated>
+    <id>http://jonr22.github.io/blog/2013/09/07/defined-symbols</id>
+    <content type="html"><![CDATA[<p>I was playing in irb and I wanted to look at the defined symbols, conveniently you can use</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Symbol</span><span class="o">.</span><span class="n">all_symbols</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>then I decided to check if some particular symbols were defined, so I ran the following command</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Symbol</span><span class="o">.</span><span class="n">all_symbols</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="ss">:abcde</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<!-- more -->
+
+
+<p>However, I immediately found it curious to see that every symbol I tried was coming up as being included in the Symbol.all_symbols array.</p>
+
+<p>Thinking about it however, this make perfect sense, the symbol was defined as part of the statement I executed and therefore added to the Symbol.all_symbols array and so it was found as being included in this array.</p>
+
+<p>I still wanted to be able to find if a symbol was defined (not that it particularly matters whether it&rsquo;s defined or not, but I was having fun) so I came up with using the any? method provided by Enumerable, and instead of looking for a symbol, I looked for the string equivalent, like so:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Symbol</span><span class="o">.</span><span class="n">all_symbols</span><span class="o">.</span><span class="n">any?</span> <span class="p">{</span> <span class="o">|</span><span class="n">s</span><span class="o">|</span> <span class="n">s</span><span class="o">.</span><span class="n">to_s</span> <span class="o">==</span> <span class="s2">&quot;abcde&quot;</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I don&rsquo;t think this is particularly useful to many people, but I found it interesting and I think it shows how flexible Ruby is, in that I was still able to come up with a fairly simple one-line statement to accomplish what I was looking for.</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Hello World]]></title>
-    <link href="http://jonr22.github.io/blog/2014/02/07/hello-world/"/>
-    <updated>2014-02-07T15:28:14-05:00</updated>
-    <id>http://jonr22.github.io/blog/2014/02/07/hello-world</id>
+    <link href="http://jonr22.github.io/blog/2013/09/07/hello-world/"/>
+    <updated>2013-09-07T16:26:14-04:00</updated>
+    <id>http://jonr22.github.io/blog/2013/09/07/hello-world</id>
     <content type="html"><![CDATA[<p>As a developer I figured I better start off blogging with a &ldquo;Hello World.&rdquo;</p>
 
 <p>I&rsquo;m planning to use this blog to talk about things I find interesting, mostly that&rsquo;s programming.
