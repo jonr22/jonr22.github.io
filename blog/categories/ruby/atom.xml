@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ruby | Developing Jon]]></title>
   <link href="http://jonr22.github.io/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://jonr22.github.io/"/>
-  <updated>2014-03-12T15:14:11-04:00</updated>
+  <updated>2014-03-12T15:41:35-04:00</updated>
   <id>http://jonr22.github.io/</id>
   <author>
     <name><![CDATA[Jon Reimels]]></name>
@@ -12,6 +12,37 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress]]></title>
+    <link href="http://jonr22.github.io/blog/2014/03/12/octopress/"/>
+    <updated>2014-03-12T15:24:39-04:00</updated>
+    <id>http://jonr22.github.io/blog/2014/03/12/octopress</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ve just started using the <a href="http://octopress.org/">octopress</a> blogging framework (A blogging
+framework for hackers) and so far I really like it. It&rsquo;s super easy to setup, assuming you&rsquo;re
+a developer / hacker (and especially if you&rsquo;re familiar with ruby). If you&rsquo;re interested, the
+documentation on their website is very easy to follow.</p>
+
+<p>Previously I was using wordpress, and while it&rsquo;s a fine platform, I never wanted to pay for
+it, so my ability to customize felt very limited. Now with octopress I have complete
+flexibility and since it&rsquo;s open source I have access to the code. In fact I&rsquo;ve already looked
+around the code a bit to help me find the sass variables I needed to customize the look and feel
+of the site.</p>
+
+<!-- more -->
+
+
+<p>Octopress has been setup so that it&rsquo;s very easy to customize, especially for small CSS changes.
+They&rsquo;ve nicely setup a <code>custom</code> directory with sass stylesheets that get loaded last, so that
+you can override any CSS settings and SASS variables. Overall it seems very well thought out.</p>
+
+<p>Combine this with the ability to host the site on github for free and you&rsquo;ve got a great setup.
+Not to mention, if you do much with github, then you&rsquo;re probably somewhat familiar with the
+markdown language, so you already have the knowledge needed to create posts.</p>
+
+<p>Another benefit that I like is being able to write my posts in my favorite editor, vim!!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Should_receive]]></title>
