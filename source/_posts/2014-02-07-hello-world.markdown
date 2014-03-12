@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Hello World"
-date: 2014-02-07 15:28:14 -0500
+date: 2013-09-07 15:26:14 -0500
 comments: true
 categories:
 ---
@@ -17,3 +17,4 @@ Python, Perl, and PHP. However, I've found a strong affinity for Ruby and the Ru
 
 I hope that as I continue to post, others will find this useful, or share their experiences or
 insights in the comments.
+

@@ -1,0 +1,34 @@
+---
+layout: post
+title: "tmux"
+date: 2013-09-12 01:19:03 -0500
+comments: true
+categories: [tmux, vim]
+---
+I've got tmux setup on my mac now. I'm running it in iterm2 and using zsh as the default shell. It
+took a lot of playing with to get it setup right, but so far I think it's worth it! Obviously I'm
+still learning a ton and I hope to share my experiences as I continue working with these tools, but
+so far I've found some great resources.
+
+<!-- more -->
+
+A great article on setting up iterm2, vim, tmux and zsh:
+[drbunsen.org/the-text-triumvirate](http://www.drbunsen.org/the-text-triumvirate)
+
+Also the github repos I mentioned in my previous post from
+[thoughtbot](https://github.com/thoughtbot/dotfiles) and
+[square](https://github.com/square/maximum-awesome) both have some great config settings, and
+[thoughtbot](https://learn.thoughtbot.com/tmux) has some additional helpful articles as well.
+
+The only issue that I had trouble with was getting colors to display properly in vim when in tmux.
+My colors ([solarized](http://ethanschoonover.com/solarized)) would display fine in the regular
+terminal, but as soon as I started up tmux and tried to run vim inside of it, the colors would get
+messed up. It turns out I needed to set the TERM from which I was calling tmux, this can be done in
+one of two ways, the first would be to call tmux like this (or set an alias):
+
+```bash
+TERM=xterm-256color tmux
+```
+
+The other is to update your terminal app to set TERM appropriately, in iTerm2 I did this in
+`Preferences > Profile > Terminal > Report Terminal Type` which I set to `xterm-256color`

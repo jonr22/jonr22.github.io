@@ -1,0 +1,26 @@
+---
+layout: post
+title: "Vim"
+date: 2013-09-10 01:38:56 -0500
+comments: true
+categories: [rails, ruby, vim]
+---
+Square recently released their Vim setup on github
+[github.com/square/maximum-awesome/tree/master/vim/bundle](https://github.com/square/maximum-awesome/tree/master/vim/bundle).
+I've had a look through it and I've found some great stuff to add to my current vim setup
+[github.com/jonr22/dotfiles](https://github.com/jonr22/dotfiles). They've got some
+useful stuff in there and I definitely recommmend checking it out. It's really great to see
+these things being shared with the community!
+
+<!-- more -->
+
+I've always loved using vim, but being new to Ruby and to Rails I didn't realize how many great
+plugins there are out there (most of them seem to be by Tim Pope, he's got a lot of great Vim
+stuff!!). This got me looking around and I found some good stuff from thoughtbot as well
+[github.com/thoughtbot/dotfiles](https://github.com/thoughtbot/dotfiles).
+
+Looking around at this stuff, I've noticed that a lot of people seem to be using iTerm2, tmux, and zsh. I'm going
+to have to look at these soon, I've always used bash and I'm pretty comfortable with it, but
+zsh might be worth a try. I've done most of my terminal work on linux, so terminal.app was always
+good enough for me when I've been on my mac. These days I seem to be doing a lot more on mac instead of my
+linux VMs though, so I'm looking forward to trying out iTerm2.
