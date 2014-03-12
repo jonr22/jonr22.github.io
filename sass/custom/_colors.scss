@@ -1,20 +1,24 @@
 // Here you can easily change your sites's color scheme.
 // To give it a try, uncomment some of the lines below rebuild your blog, and see how it works.
 // If you need a handy color picker try http://hslpicker.com
+$dark-orange: #f1592a;
+$medium-orange: #f2ab42;
+$medium-light-orange: #fcb040;
+$light-orange: #ffd08e;
 
-//$header-bg: #f6f6f6;
-//$subtitle-color: lighten($header-bg, 58);
 $page-bg: #3c3c3c;
 
 $nav-bg: #f6f6f6;
 $nav-color: #555555;
-$nav-color-hover: #fcb040;
+$nav-color-hover: $medium-light-orange;
+
 $sidebar-link-color: #555555;
-$sidebar-link-color-hover: #fcb040;
-$link-color: #f1592a;
-$link-color-hover: #fcb040;
-$link-color-visited: #ffd08e;
-$link-color-active: #fcb040;
+$sidebar-link-color-hover: $medium-light-orange;
+
+$link-color: $dark-orange;
+$link-color-hover: $medium-orange;
+$link-color-visited: $medium-light-orange;
+$link-color-active: $medium-orange;
 
 /* To use the light Solarized highlighting theme uncomment the following line */
 //$solarized: light;
