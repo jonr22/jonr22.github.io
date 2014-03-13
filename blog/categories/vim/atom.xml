@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Vim | Developing Jon]]></title>
+  <title><![CDATA[Category: vim | Developing Jon]]></title>
   <link href="http://jonr22.github.io/blog/categories/vim/atom.xml" rel="self"/>
   <link href="http://jonr22.github.io/"/>
-  <updated>2014-03-12T15:52:54-04:00</updated>
+  <updated>2014-03-13T01:44:12-04:00</updated>
   <id>http://jonr22.github.io/</id>
   <author>
     <name><![CDATA[Jon Reimels]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Tmux]]></title>
+    <title type="html"><![CDATA[tmux]]></title>
     <link href="http://jonr22.github.io/blog/2013/09/12/tmux/"/>
     <updated>2013-09-12T02:19:03-04:00</updated>
     <id>http://jonr22.github.io/blog/2013/09/12/tmux</id>

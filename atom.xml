@@ -4,7 +4,7 @@
   <title><![CDATA[Developing Jon]]></title>
   <link href="http://jonr22.github.io/atom.xml" rel="self"/>
   <link href="http://jonr22.github.io/"/>
-  <updated>2014-03-12T15:52:54-04:00</updated>
+  <updated>2014-03-13T01:44:12-04:00</updated>
   <id>http://jonr22.github.io/</id>
   <author>
     <name><![CDATA[Jon Reimels]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Octopress]]></title>
+    <title type="html"><![CDATA[octopress]]></title>
     <link href="http://jonr22.github.io/blog/2014/03/12/octopress/"/>
     <updated>2014-03-12T15:24:39-04:00</updated>
     <id>http://jonr22.github.io/blog/2014/03/12/octopress</id>
@@ -45,7 +45,7 @@ markdown language, so you already have the knowledge needed to create posts.</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Should_receive]]></title>
+    <title type="html"><![CDATA[should_receive]]></title>
     <link href="http://jonr22.github.io/blog/2014/02/03/should-receive/"/>
     <updated>2014-02-03T19:40:39-05:00</updated>
     <id>http://jonr22.github.io/blog/2014/02/03/should-receive</id>
@@ -114,7 +114,7 @@ when save is called, while it doesn&rsquo;t do anything, it also doesn&rsquo;t t
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Tmux]]></title>
+    <title type="html"><![CDATA[tmux]]></title>
     <link href="http://jonr22.github.io/blog/2013/09/12/tmux/"/>
     <updated>2013-09-12T02:19:03-04:00</updated>
     <id>http://jonr22.github.io/blog/2013/09/12/tmux</id>
