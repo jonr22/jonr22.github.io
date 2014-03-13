@@ -5,14 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Blog Archive - Developing Jon</title>
+  <title>Customizing Rails Generated Views - Developing Jon</title>
   <meta name="author" content="Jon Reimels">
 
   
-  <meta name="description" content="Blog Archive 2014 Customizing Rails Generated Views
-Mar 14 2014 posted in rails octopress
-Mar 12 2014 posted in blogs, ruby should_receive
-Feb 03 &hellip;">
+  <meta name="description" content="One of my favorite things about rails is how easy it is to get simple scaffolding setup. I find in
+particular that I&rsquo;ve been using it to create &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,7 +19,7 @@ Feb 03 &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://jonr22.github.io/blog/archives">
+  <link rel="canonical" href="http://jonr22.github.io/blog/2014/03/14/customizing-rails-generated-views">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Developing Jon" type="application/atom+xml">
@@ -70,133 +68,120 @@ Feb 03 &hellip;">
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Blog Archive</h1>
+    
+      <h1 class="entry-title">Customizing Rails Generated Views</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-14T11:06:33-04:00" pubdate data-updated="true">Mar 14<span>th</span>, 2014</time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives">
 
 
+<div class="entry-content"><p>One of my favorite things about rails is how easy it is to get simple scaffolding setup. I find in
+particular that I&rsquo;ve been using it to create administration forms for my websites. I&rsquo;m working in
+within an agile framework so getting a basic implementation up and running first is the priority
+an rails generators are perfect for this, it creates just about everything I need to get this
+basic implementation working, I can then go back with future user stories and clean stuff up.</p>
 
-  
-  <h2>2014</h2>
+<p>The only downside of the rails generators is that the default styling doesn&rsquo;t work with the way I&rsquo;ve customized my pages.
+At first I was manually adjusting the code of the generated views to match the rest of
+the views I&rsquo;d already created. It wasn&rsquo;t that much work, but still a very tedious process and
+as we are all aware most of us developers hate tedious work. One day when I was finally fed up
+with this process (it didn&rsquo;t take long) I decided that there had to be a better way and I started looking into
+creating my own generators. However, as I started looking into this I quickly discovered that rails
+made simple customizations to it&rsquo;s generators really easy.</p>
 
-<article>
-  
-<h1><a href="/blog/2014/03/14/customizing-rails-generated-views/">Customizing Rails Generated Views</a></h1>
-<time datetime="2014-03-14T11:06:33-04:00" pubdate><span class='month'>Mar</span> <span class='day'>14</span> <span class='year'>2014</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/rails/'>rails</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2014/03/12/octopress/">octopress</a></h1>
-<time datetime="2014-03-12T15:24:39-04:00" pubdate><span class='month'>Mar</span> <span class='day'>12</span> <span class='year'>2014</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/blogs/'>blogs</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a></span>
-</footer>
+<!-- more -->
 
 
-</article>
+<p>All you have to do to adjust the view templates is to add your own templates to <code>lib/erb/scaffold/</code> and rails generators
+will start using these templates for you. To get started it&rsquo;s probably easiest to copy the existing templates, you can
+find them in your rails gem directory within: <code>lib/rails/generators/erb/scaffold/templates</code>. If you don&rsquo;t know where
+the rails gem directory is you can find it with this command <code>gem which rails</code> I use rvm and so for me it was located at
+<code>~/.rvm/gems/ruby-2.0.0-p195/gems/railties-4.0.1</code></p>
 
-
-
-<article>
-  
-<h1><a href="/blog/2014/02/03/should-receive/">should_receive</a></h1>
-<time datetime="2014-02-03T19:40:39-05:00" pubdate><span class='month'>Feb</span> <span class='day'>03</span> <span class='year'>2014</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/rails/'>rails</a>, <a class='category' href='/blog/categories/rspec/'>rspec</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a></span>
-</footer>
-
-
-</article>
-
-
-
-  
-  <h2>2013</h2>
-
-<article>
-  
-<h1><a href="/blog/2013/09/12/tmux/">tmux</a></h1>
-<time datetime="2013-09-12T02:19:03-04:00" pubdate><span class='month'>Sep</span> <span class='day'>12</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/tmux/'>tmux</a>, <a class='category' href='/blog/categories/vim/'>vim</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2013/09/10/vim/">Vim</a></h1>
-<time datetime="2013-09-10T02:38:56-04:00" pubdate><span class='month'>Sep</span> <span class='day'>10</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/rails/'>rails</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>, <a class='category' href='/blog/categories/vim/'>vim</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2013/09/08/custom-model-validation/">Custom Model Validation</a></h1>
-<time datetime="2013-09-08T14:45:14-04:00" pubdate><span class='month'>Sep</span> <span class='day'>08</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/rails/'>rails</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2013/09/07/defined-symbols/">Defined Symbols</a></h1>
-<time datetime="2013-09-07T16:51:56-04:00" pubdate><span class='month'>Sep</span> <span class='day'>07</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/ruby/'>ruby</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2013/09/07/hello-world/">Hello World</a></h1>
-<time datetime="2013-09-07T16:26:14-04:00" pubdate><span class='month'>Sep</span> <span class='day'>07</span> <span class='year'>2013</span></time>
-
-
-</article>
-
+<p>Once you have those files copied into your app specific directory, it&rsquo;s pretty easy to figure out how to modify the files,
+plus you can always check the rails docs for more information. Now whenever I run <code>rails generate scaffold ...</code> I get
+views with my custom templating, saving me some tedious manual work.</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Jon Reimels</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-14T11:06:33-04:00" pubdate data-updated="true">Mar 14<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/rails/'>rails</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://jonr22.github.io/blog/2014/03/14/customizing-rails-generated-views/" data-via="jreimels" data-counturl="http://jonr22.github.io/blog/2014/03/14/customizing-rails-generated-views/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/03/12/octopress/" title="Previous Post: octopress">&laquo; octopress</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -252,7 +237,10 @@ Feb 03 &hellip;">
       var disqus_shortname = 'developingjon';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://jonr22.github.io/blog/2014/03/14/customizing-rails-generated-views/';
+        var disqus_url = 'http://jonr22.github.io/blog/2014/03/14/customizing-rails-generated-views/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
