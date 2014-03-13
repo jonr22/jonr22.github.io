@@ -1,7 +1,11 @@
 // This File is imported last, and will override other styles in the cascade
 // Add styles here to make changes without digging in too much
 h1, h2 {
-  color: #f1592a;
+  color: $dark-orange;
+}
+
+html {
+  background: $page-bg image-url('noise.png') top left;
 }
 
 body {
@@ -9,4 +13,37 @@ body {
     background: image-url('cropped-redline.jpg') no-repeat scroll top;
     background-size: 1200px auto;
   }
+
+  > nav {
+    background-image: none;
+    background-color: $nav-bg;
+    form {
+      .search {
+        &:focus {
+          border-color: $dark-orange;
+          @include box-shadow($dark-orange 0 0 4px, $dark-orange 0 0 3px inset);
+        }
+      }
+    }
+  }
+
+  > footer {
+    background: none;
+    text-shadow: none;
+    border-top: none;
+  }
+}
+
+#content {
+  background-color: #fff;
+  background-image: none;
+}
+
+::selection {
+  background-color: $medium-orange;
+  color: #fff;
+}
+
+a::selection {
+  color: inherit;
 }

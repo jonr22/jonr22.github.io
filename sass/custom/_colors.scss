@@ -5,19 +5,24 @@ $dark-orange: #f1592a;
 $medium-orange: #f2ab42;
 $medium-light-orange: #fcb040;
 $light-orange: #ffd08e;
+$dark-bg: #3c3c3c;
+$light-bg: #f6f6f6;
+$medium-gray: #555555;
+$border-color: #e5e5e5;
 
-$page-bg: #3c3c3c;
+$page-bg: $dark-bg;
 
-$nav-bg: #f6f6f6;
-$nav-color: #555555;
+$nav-bg: $light-bg;
+$nav-color: $medium-gray;
 $nav-color-hover: $medium-light-orange;
+$nav-border-bottom: $border-color;
 
-$sidebar-link-color: #555555;
+$sidebar-link-color: $medium-gray;
 $sidebar-link-color-hover: $medium-light-orange;
 
 $link-color: $dark-orange;
 $link-color-hover: $medium-orange;
-$link-color-visited: $medium-light-orange;
+$link-color-visited: $dark-orange;
 $link-color-active: $medium-orange;
 
 /* To use the light Solarized highlighting theme uncomment the following line */
